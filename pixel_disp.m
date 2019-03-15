@@ -20,20 +20,20 @@ function [y, Xa, Ya] = pixel_disp(img1, img2, x, y, support_window_size, search_
 
     %for column start of search window till this end value
     for i = sax:(sax+search_area_size)
-        if i > imgsizeX
+        if i >= imgsizeX
             break
         end
         %for row start of search window till this end value
         for j = say:(say+search_area_size)
-            if j > imgsizeY
+            if j >= imgsizeY
                 break
             end
             %create support window
             right_sw = create_support_window(img2, i, j, support_window_size);
-            [rx, ry, rz] = size(right_sw);
-            if rx == 10
-                y=0;
-            end
+%             [rx, ry, rz] = size(right_sw);
+%             if rx == 10
+%                 y=0;
+%             end
             %compare windows
             disp_vec2 = support_cmp(left_sw, right_sw);
             %save the values if the minimum difference is received
@@ -42,7 +42,7 @@ function [y, Xa, Ya] = pixel_disp(img1, img2, x, y, support_window_size, search_
                 disp_vec = disp_vec2;
                 Xa = i;
                 Ya = j;
-                %imshowpair(left_sw, right_sw, "montage")
+                imshowpair(left_sw, right_sw, "montage")
 
             end
         end
