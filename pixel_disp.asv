@@ -1,7 +1,7 @@
 function [y, Xa, Ya] = pixel_disp(img1, img2, x, y)
     
-    support_window_size = 10;
-    search_area_size = 20;
+    support_window_size = 30;
+    search_area_size = 100;
     
     [imgsizeX, imgsizeY] = size(img2);
 
@@ -12,7 +12,8 @@ function [y, Xa, Ya] = pixel_disp(img1, img2, x, y)
     [sax,say] = top_left(x, y, search_area_size);
     
     disp_vec = -1;
-    [Xa, Ya] = [0, 0];
+    Xa = 0;
+    Ya = 0;
     
     %for column start of search window till this end value
     for j = say:say+search_area_size
@@ -37,4 +38,10 @@ function [y, Xa, Ya] = pixel_disp(img1, img2, x, y)
             end
         end
     end
+    [xaxa, yaya] = top_left(Xa, Ya, support_window_size);
+    %imshowpair(left_sw, imcrop(img2, [xaxa, yaya, support_window_size, support_window_size]), "montage")
+    Xa
+    Ya
     y = disp_vec
+    
+  
