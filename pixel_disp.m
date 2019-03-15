@@ -1,7 +1,4 @@
-function [y, Xa, Ya] = pixel_disp(img1, img2, x, y)
-    
-    support_window_size = 40;
-    search_area_size = 120;
+function [y, Xa, Ya] = pixel_disp(img1, img2, x, y, support_window_size, search_area_size)
     
     [imgsizeX, imgsizeY, imgsizeZ] = size(img2);
 
@@ -40,7 +37,7 @@ function [y, Xa, Ya] = pixel_disp(img1, img2, x, y)
             end
         end
     end
-    [xaxa, yaya] = top_left(Xa, Ya, support_window_size);
+    %[xaxa, yaya] = top_left(Xa, Ya, support_window_size);
     %imshowpair(left_sw, imcrop(img2, [xaxa, yaya, support_window_size, support_window_size]), "montage")
     Xa
     Ya
