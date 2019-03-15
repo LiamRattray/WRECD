@@ -1,6 +1,6 @@
 function [y, Xa, Ya] = pixel_disp(img1, img2, x, y)
     
-    support_window_size = 40;
+    support_window_size = 30;
     search_area_size = 120;
     
     [imgsizeX, imgsizeY, imgsizeZ] = size(img2);
@@ -10,19 +10,25 @@ function [y, Xa, Ya] = pixel_disp(img1, img2, x, y)
     
     %find start point for search area
     [sax,say] = top_left(x, y, search_area_size);
+    if sax < 0
+        sax = 0;
+    end
+    if say < 0 
+        say = 0;
+    end
     
     disp_vec = -1;
     Xa = 0;
     Ya = 0;
     
     %for column start of search window till this end value
-    for j = say:(say+search_area_size)
-        if j > imgsizeY
+    for i = sax:(sax+search_area_size)
+        if i > imgsizeX
             break
         end
         %for row start of search window till this end value
-        for i = sax:(sax+search_area_size)
-            if i > imgsizeX
+        for j = say:(say+search_area_size)
+            if j > imgsizeY
                 break
             end
             %create support window
