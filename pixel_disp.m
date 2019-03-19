@@ -1,4 +1,4 @@
-function [y, Xa, Ya] = pixel_disp(img1, img2, x, y, support_window_size, search_area_size)
+function [y, Xa, Ya, d] = pixel_disp(img1, img2, x, y, support_window_size, search_area_size)
     
     [imgsizeX, imgsizeY, imgsizeZ] = size(img2);
 
@@ -42,7 +42,7 @@ function [y, Xa, Ya] = pixel_disp(img1, img2, x, y, support_window_size, search_
                 disp_vec = disp_vec2;
                 Xa = i;
                 Ya = j;
-                imshowpair(left_sw, right_sw, "montage")
+                %imshowpair(left_sw, right_sw, "montage")
 
             end
         end
@@ -51,4 +51,5 @@ function [y, Xa, Ya] = pixel_disp(img1, img2, x, y, support_window_size, search_
     %imshowpair(left_sw, imcrop(img2, [xaxa, yaya, support_window_size, support_window_size]), "montage")
     %Xa
     %Ya
+    d = [x-Xa, y-Ya];
     y = disp_vec;
