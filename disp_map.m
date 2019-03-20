@@ -1,12 +1,15 @@
-function [disparity_mapX, disparity_mapY, disparity_map] = disp_map(img1, img2, support_window_size, search_area_size)
+function [disparity_mapX, disparity_mapY, disparity_map] = disp_map(img1, img2, support_window_size, search_area_h_size, search_area_v_size)
     %image size
-    img1 = rgb2gray(img1);
-    img2 = rgb2gray(img2);
-    [imgsizeX, imgsizeY, imgsizeZ] = size(img1);
+    try
+        img1 = rgb2gray(img1);
+        img2 = rgb2gray(img2);
+    catch exception
+    end
+    [imgsizeY, imgsizeX] = size(img1);
     % create empty disparity map
-    disparity_mapX = zeros(imgsizeX, imgsizeY);
-    disparity_mapY = zeros(imgsizeX, imgsizeY);
-    disparity_map = cell(imgsizeX, imgsizeY);
+    disparity_mapY = zeros(imgsizeY, imgsizeX);
+    disparity_mapX = zeros(imgsizeY, imgsizeX);
+    disparity_map = cell(imgsizeY, imgsizeX);
 
     % check that search area size is smaller than image
     
@@ -18,12 +21,12 @@ function [disparity_mapX, disparity_mapY, disparity_map] = disp_map(img1, img2, 
     %    for j = support_window_size:imgsizeY-support_window_size-1
     for i = 1:imgsizeX
         for j = 1:imgsizeY
-            [ssd, xa, ya, d] = pixel_disp(img1, img2, i, j, support_window_size, search_area_size);
-            %movement along up - down
-            disparity_mapX(i, j) = i-xa;
-            %movement along left - right
-            disparity_mapY(i, j) = j-ya;
+            [ssd, xa, ya, d] = pixel_disp(img1, img2, i, j, support_window_size, search_area_h_size, search_area_v_size);
+            %movement along left/right
+            disparity_mapX(j, i) = i-xa;
+            %movement along up/down
+            disparity_mapY(j, i) = j-ya;
             %stores vectors and values
-            disparity_map{i, j} = [d, ssd];
+            disparity_map{j, i} = [d, ssd];
         end
     end
