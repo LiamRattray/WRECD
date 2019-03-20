@@ -1,4 +1,4 @@
-function [disparity_mapX, disparity_mapY, disparity_map] = disp_map(img1, img2, support_window_size, search_area_size)
+function [disparity_mapX, disparity_mapY, disparity_map] = disp_map(img1, img2, support_window_size, search_area_h_size, search_area_v_size)
     %image size
     img1 = rgb2gray(img1);
     img2 = rgb2gray(img2);
@@ -18,7 +18,7 @@ function [disparity_mapX, disparity_mapY, disparity_map] = disp_map(img1, img2, 
     %    for j = support_window_size:imgsizeY-support_window_size-1
     for i = 1:imgsizeX
         for j = 1:imgsizeY
-            [ssd, xa, ya, d] = pixel_disp(img1, img2, i, j, support_window_size, search_area_size);
+            [ssd, xa, ya, d] = pixel_disp(img1, img2, i, j, support_window_size, search_area_h_size, search_area_v_size);
             %movement along up - down
             disparity_mapX(i, j) = i-xa;
             %movement along left - right

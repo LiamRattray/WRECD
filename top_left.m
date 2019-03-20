@@ -1,5 +1,5 @@
-function [corx, cory] = top_left(x, y, winsize)
-    top = floor(y - winsize/2);
-    left = floor(x - winsize/2);
-    corx=left;
-    cory=top;
+function [row, col] = top_left(x, y, horizontal, vertical)
+    top = floor(y - vertical/2);
+    left = floor(x - horizontal/2);
+    col=left;
+    row=top;
