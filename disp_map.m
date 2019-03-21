@@ -15,9 +15,9 @@ function [disparity_mapX, disparity_mapY, disparity_map] = disp_map(img1, img2, 
     f = waitbar(0, "Generating disparity map");
 
     %loot through the image calculating the disparity map
-    for i = 20:imgsizeX-20
+    for i = 30:imgsizeX-30
         waitbar(i/imgsizeX, f, "Generating disparity map");
-        for j = 20:imgsizeY-20
+        for j = 30:imgsizeY-30
             [ssd, xa, ya, d] = pixel_disp(img1, img2, i, j, support_window_size, search_area_h_size, search_area_v_size);
             %movement along left/right
             disparity_mapX(j, i) = i-xa;
