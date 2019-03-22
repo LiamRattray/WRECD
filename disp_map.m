@@ -19,7 +19,16 @@ function [disparity_map] = disp_map(img1, img2, support_window_size, search_area
             [ssd, xa, ya, d] = pixel_disp(img1, img2, i, j, support_window_size, search_area_h_size, search_area_v_size);
             %movement along left/right
             disparity_map(j, i) = i-xa;
-            search_area_h_size = abs(i-xa)*2 + 2;
+            if abs(i-xa)*2 >= search_area_h_size
+                search_area_h_size = abs(i-xa)*2 + 4;
+            end
+            
+%             if search_area_h_size > imgsizeX/3
+%                 search_area_h_size = imgsizeX/3;
+%             end
+%             if search_area_h_size < 8
+%                 search_area_h_size = 8;
+%             end
         end
     end
     
